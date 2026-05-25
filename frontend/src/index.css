@@ -1,0 +1,438 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+:root {
+  --bg-skeuo: #e0e5ec;
+  --bg-gradient-skeuo: linear-gradient(145deg, #f0f4f8, #e0e5ec);
+  --bg-gradient-skeuo-raised: linear-gradient(145deg, #e0e5ec, #d1d9e6);
+  --shadow-dark: rgba(163, 177, 198, 0.5);
+  --shadow-light: rgba(255, 255, 255, 0.6);
+}
+
+.dark {
+  --bg-skeuo: #1e2229;
+  --bg-gradient-skeuo: linear-gradient(145deg, #252a32, #15181d);
+  --bg-gradient-skeuo-raised: linear-gradient(145deg, #2a2f38, #1e2229);
+  --shadow-dark: rgba(0, 0, 0, 0.45);
+  --shadow-light: rgba(255, 255, 255, 0.05);
+}
+
+/* ── Grain texture overlay ─────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #f5a623; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #c47f00; }
+
+/* ── Selection ─────────────────────────────────────────────────────── */
+::selection { background: rgba(245,166,35,0.3); color: inherit; }
+
+/* ── Physical Surface Backgrounds ─────────────────────────────────── */
+.bg-surface-skeuo {
+  background-color: #e0e5ec;
+  background-image: linear-gradient(145deg, #f0f4f8, #d1d9e6);
+}
+
+.dark .bg-surface-skeuo {
+  background-color: #1a1d24;
+  background-image: linear-gradient(145deg, #1e2229, #15181d);
+}
+
+/* ── Skeuomorphic Core Card ────────────────────────────────────────── */
+.skeuo-card {
+  @apply rounded-3xl border-none transition-all duration-300;
+  background: #e0e5ec;
+  box-shadow:
+    9px 9px 18px rgba(163, 177, 198, 0.65),
+    -9px -9px 18px rgba(255, 255, 255, 0.7);
+}
+
+.dark .skeuo-card {
+  background: #1e2229;
+  box-shadow:
+    8px 8px 18px rgba(0, 0, 0, 0.45),
+    -4px -4px 12px rgba(255, 255, 255, 0.05);
+}
+
+/* ── Skeuomorphic Panel (lighter raised surface) ───────────────────── */
+.skeuo-panel {
+  @apply rounded-2xl transition-all duration-300;
+  background: #e8edf3;
+  box-shadow:
+    6px 6px 12px rgba(163, 177, 198, 0.55),
+    -6px -6px 12px rgba(255, 255, 255, 0.65);
+}
+
+.dark .skeuo-panel {
+  background: #252a32;
+  box-shadow:
+    6px 6px 14px rgba(0, 0, 0, 0.4),
+    -3px -3px 10px rgba(255, 255, 255, 0.05);
+}
+
+/* ── Metallic / Beveled Buttons ────────────────────────────────────── */
+.skeuo-btn {
+  @apply rounded-2xl font-bold transition-all duration-200 active:scale-95 flex items-center justify-center border border-white/20;
+}
+
+.skeuo-btn-amber {
+  @apply skeuo-btn text-ink;
+  background: linear-gradient(145deg, #ffb833, #dd9520);
+  box-shadow:
+    5px 5px 10px rgba(163, 177, 198, 0.45),
+    -5px -5px 10px rgba(255, 255, 255, 0.6),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.35);
+}
+
+.skeuo-btn-amber:active {
+  background: #f5a623;
+  box-shadow:
+    inset 4px 4px 8px rgba(0, 0, 0, 0.12),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.1);
+}
+
+.dark .skeuo-btn-amber {
+  box-shadow:
+    5px 5px 10px rgba(0, 0, 0, 0.5),
+    -3px -3px 8px rgba(255, 255, 255, 0.08),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+.skeuo-btn-violet {
+  @apply skeuo-btn text-white;
+  background: linear-gradient(145deg, #8a4bff, #7034d5);
+  box-shadow:
+    5px 5px 10px rgba(163, 177, 198, 0.4),
+    -5px -5px 10px rgba(255, 255, 255, 0.2),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+.dark .skeuo-btn-violet {
+  box-shadow:
+    5px 5px 10px rgba(0, 0, 0, 0.5),
+    -3px -3px 8px rgba(255, 255, 255, 0.05),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.15);
+}
+
+/* ── Inset Input fields ────────────────────────────────────────────── */
+.skeuo-input {
+  @apply w-full rounded-2xl px-6 py-4 transition-all border-none bg-[#e0e5ec] dark:bg-[#111111];
+  box-shadow:
+    inset 4px 4px 8px rgba(163, 177, 198, 0.65),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.55);
+}
+
+.dark .skeuo-input {
+  background-color: #15181d;
+  box-shadow:
+    inset 4px 4px 10px rgba(0, 0, 0, 0.4),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.04);
+}
+
+/* ── Skeuomorphic Badge (embossed label) ───────────────────────────── */
+.skeuo-badge {
+  @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold;
+  background: #e0e5ec;
+  box-shadow:
+    2px 2px 5px rgba(163, 177, 198, 0.5),
+    -2px -2px 5px rgba(255, 255, 255, 0.6),
+    inset 0 0 0 1px rgba(255,255,255,0.3);
+}
+
+.dark .skeuo-badge {
+  background: #1e2229;
+  box-shadow:
+    2px 2px 6px rgba(0, 0, 0, 0.4),
+    -1px -1px 4px rgba(255, 255, 255, 0.05),
+    inset 0 0 0 1px rgba(255,255,255,0.03);
+}
+
+/* ── Skeuomorphic Inset Strip (header bands) ───────────────────────── */
+.skeuo-inset-strip {
+  background: rgba(163, 177, 198, 0.15);
+  box-shadow:
+    inset 0 2px 4px rgba(163, 177, 198, 0.4),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.dark .skeuo-inset-strip {
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow:
+    inset 0 2px 5px rgba(0, 0, 0, 0.4),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.04);
+}
+
+/* ── Physical Divider ──────────────────────────────────────────────── */
+.skeuo-divider {
+  border: none;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(163, 177, 198, 0.4) 20%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(163, 177, 198, 0.4) 80%,
+    transparent
+  );
+}
+
+.dark .skeuo-divider {
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(0,0,0,0.5) 20%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(0,0,0,0.5) 80%,
+    transparent
+  );
+}
+
+/* ── Chat Bubbles (Realistic depth) ────────────────────────────────── */
+.chat-user {
+  @apply rounded-2xl rounded-br-none px-5 py-3.5 max-w-[80%] ml-auto;
+  background: linear-gradient(145deg, #ffb833, #dd9520);
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.12), -1px -1px 4px rgba(255,255,255,0.3);
+  color: #1a1a1a;
+}
+
+.chat-assistant {
+  @apply rounded-2xl rounded-bl-none px-5 py-3.5 max-w-[85%];
+  background: #e0e5ec;
+  box-shadow:
+    4px 4px 8px rgba(163, 177, 198, 0.45),
+    -3px -3px 7px rgba(255, 255, 255, 0.6);
+}
+
+.dark .chat-assistant {
+  background: #252a32;
+  box-shadow:
+    4px 4px 10px rgba(0, 0, 0, 0.35),
+    -2px -2px 6px rgba(255, 255, 255, 0.05);
+}
+
+/* ── Debate Speaker Bubbles ────────────────────────────────────────── */
+.debate-bubble-a {
+  @apply rounded-2xl rounded-tl-none px-4 py-3;
+  background: #e0e5ec;
+  border-left: 3px solid #f5a623;
+  box-shadow:
+    4px 4px 8px rgba(163, 177, 198, 0.4),
+    -2px -2px 6px rgba(255, 255, 255, 0.55);
+}
+
+.dark .debate-bubble-a {
+  background: #252a32;
+  border-left: 3px solid #f5a623;
+  box-shadow:
+    4px 4px 10px rgba(0, 0, 0, 0.35),
+    -2px -2px 6px rgba(255, 255, 255, 0.05);
+}
+
+.debate-bubble-b {
+  @apply rounded-2xl rounded-tr-none px-4 py-3;
+  background: #e0e5ec;
+  border-right: 3px solid #8b5cf6;
+  box-shadow:
+    4px 4px 8px rgba(163, 177, 198, 0.4),
+    -2px -2px 6px rgba(255, 255, 255, 0.55);
+}
+
+.dark .debate-bubble-b {
+  background: #252a32;
+  border-right: 3px solid #8b5cf6;
+  box-shadow:
+    4px 4px 10px rgba(0, 0, 0, 0.35),
+    -2px -2px 6px rgba(255, 255, 255, 0.05);
+}
+
+/* ── Verdict Card ──────────────────────────────────────────────────── */
+.verdict-card {
+  @apply rounded-2xl px-6 py-5;
+  background: linear-gradient(145deg, #e8edf3, #d4dbe6);
+  box-shadow:
+    6px 6px 12px rgba(163, 177, 198, 0.5),
+    -6px -6px 12px rgba(255, 255, 255, 0.7),
+    inset 0 1px 0 rgba(255,255,255,0.5);
+  border-top: 3px solid #f5a623;
+}
+
+.dark .verdict-card {
+  background: linear-gradient(145deg, #252a32, #1e2229);
+  box-shadow:
+    6px 6px 14px rgba(0, 0, 0, 0.4),
+    -3px -3px 10px rgba(255, 255, 255, 0.05);
+  border-top: 3px solid #f5a623;
+}
+
+/* ── Highlight Panel (PDF mini viewer) ─────────────────────────────── */
+.highlight-panel {
+  @apply overflow-hidden;
+  background: #dde2ea;
+  box-shadow:
+    8px 8px 16px rgba(163, 177, 198, 0.6),
+    -8px -8px 16px rgba(255, 255, 255, 0.65);
+}
+
+.dark .highlight-panel {
+  background: #15181d;
+  box-shadow:
+    8px 8px 18px rgba(0, 0, 0, 0.5),
+    -4px -4px 12px rgba(255, 255, 255, 0.04);
+}
+
+/* ── Typography ────────────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #f5a623, #7c3aed, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Typing cursor ─────────────────────────────────────────────────── */
+.typing-cursor::after {
+  content: '▍';
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+  color: #f5a623;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ── Landing particle ──────────────────────────────────────────────── */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ── PDF viewer wrapper ────────────────────────────────────────────── */
+.pdf-page-wrapper canvas {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* ── PDF Text Highlight ────────────────────────────────────────────── */
+.pdf-highlight-span {
+  background: rgba(245, 166, 35, 0.45) !important;
+  color: transparent !important;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.dark .pdf-highlight-span {
+  background: rgba(245, 166, 35, 0.35) !important;
+}
+
+/* ── Agent Log Terminal ────────────────────────────────────────────── */
+.agent-terminal {
+  background: #d8dde6;
+  box-shadow:
+    inset 3px 3px 7px rgba(163, 177, 198, 0.5),
+    inset -3px -3px 7px rgba(255, 255, 255, 0.5);
+  @apply rounded-2xl;
+}
+
+.dark .agent-terminal {
+  background: #111419;
+  box-shadow:
+    inset 3px 3px 8px rgba(0, 0, 0, 0.5),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.03);
+}
+
+/* ── Step Pill (inset) ─────────────────────────────────────────────── */
+.step-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  flex-shrink: 0;
+  background: #e0e5ec;
+  box-shadow:
+    inset 1px 1px 3px rgba(163, 177, 198, 0.6),
+    inset -1px -1px 3px rgba(255, 255, 255, 0.5);
+  color: #f5a623;
+}
+
+.dark .step-pill {
+  background: #1e2229;
+  box-shadow:
+    inset 1px 1px 3px rgba(0, 0, 0, 0.5),
+    inset -1px -1px 3px rgba(255, 255, 255, 0.05);
+}
+
+/* ── Paper Card Skeuo ──────────────────────────────────────────────── */
+.paper-card {
+  @apply rounded-2xl transition-all duration-200 cursor-pointer;
+  background: #e4e9f0;
+  box-shadow:
+    6px 6px 12px rgba(163, 177, 198, 0.5),
+    -6px -6px 12px rgba(255, 255, 255, 0.65);
+}
+
+.paper-card:hover {
+  box-shadow:
+    8px 8px 16px rgba(163, 177, 198, 0.6),
+    -8px -8px 16px rgba(255, 255, 255, 0.7);
+  transform: translateY(-2px);
+}
+
+.dark .paper-card {
+  background: #252a32;
+  box-shadow:
+    6px 6px 14px rgba(0, 0, 0, 0.35),
+    -3px -3px 10px rgba(255, 255, 255, 0.05);
+}
+.dark .paper-card:hover {
+  box-shadow:
+    8px 8px 18px rgba(0, 0, 0, 0.45),
+    -4px -4px 12px rgba(255, 255, 255, 0.07);
+}
+
+
+
+/* ── Prose (Markdown in chat) ──────────────────────────────────────── */
+.prose p { margin-bottom: 0.5em; line-height: 1.65; }
+.prose p:last-child { margin-bottom: 0; }
+.prose code {
+  background: rgba(245, 166, 35, 0.12);
+  border: 1px solid rgba(245, 166, 35, 0.2);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+  font-size: 0.82em;
+}
+.prose pre {
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
+  padding: 1em;
+  overflow-x: auto;
+}
+.dark .prose pre { background: rgba(0,0,0,0.4); }
+.prose h1, .prose h2, .prose h3 { font-weight: 700; margin-top: 0.8em; margin-bottom: 0.3em; }
+.prose ul { list-style: disc; padding-left: 1.4em; }
+.prose ol { list-style: decimal; padding-left: 1.4em; }
+.prose li { margin-bottom: 0.2em; }
+.prose strong { font-weight: 700; }
+.prose blockquote {
+  border-left: 3px solid #f5a623;
+  padding-left: 1em;
+  color: inherit;
+  opacity: 0.75;
+}
