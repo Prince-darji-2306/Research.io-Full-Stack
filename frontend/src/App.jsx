@@ -22,9 +22,9 @@ function App() {
       {/* Physical Surface Background */}
       <div className="fixed inset-0 -z-10 bg-surface-skeuo transition-colors duration-500" />
       
-      <div className="min-h-screen text-ink dark:text-cream transition-colors duration-300">
+      <div className="flex flex-col min-h-[100dvh] text-ink dark:text-cream transition-colors duration-300">
         <Navbar />
-        <main className="max-w-7xl mx-auto">
+        <main className="flex-1 flex flex-col w-full max-w-7xl mx-auto min-h-0">
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/search" element={<Search />} />
