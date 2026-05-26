@@ -4,7 +4,7 @@ import {
   Swords, Upload, FileText, Play, X, Trophy,
   ChevronRight, Loader2, BookOpen, Sparkles
 } from 'lucide-react'
-import { api } from '../utils/api'
+import { api, API_BASE_URL } from '../utils/api'
 import { readSSE } from '../utils/sse'
 import { useAppStore } from '../store/appStore'
 
@@ -331,7 +331,7 @@ export default function Arena() {
     abortRef.current = controller
 
     try {
-      const response = await fetch('/api/arena/debate/stream', {
+      const response = await fetch(`${API_BASE_URL}/arena/debate/stream`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -7,6 +7,7 @@ import { Send, User, Bot, AlertCircle, BookOpen, Search, FileSearch, Brain } fro
 import { useAppStore } from '../store/appStore'
 import clsx from 'clsx'
 import { readSSE } from '../utils/sse'
+import { API_BASE_URL } from '../utils/api'
 
 /* ── Processing Steps ──────────────────────────────────────────────── */
 function ProcessingSteps({ steps }) {
@@ -275,7 +276,7 @@ export default function ChatPanel({ sessionId, titleAccessory }) {
     addChatMessage({ role: 'assistant', content: '', isStreaming: true, chunks: [], processingSteps: [...steps] })
 
     try {
-      const response = await fetch('/api/chat/stream', {
+      const response = await fetch(`${API_BASE_URL}/chat/stream`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ session_id: sessionId, content: query, paper_id: paperId }),

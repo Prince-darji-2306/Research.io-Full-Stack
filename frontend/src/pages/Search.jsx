@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, Sparkles, Swords } from 'lucide-react'
-import { api } from '../utils/api'
+import { api, API_BASE_URL } from '../utils/api'
 import { readSSE } from '../utils/sse'
 import { useAppStore } from '../store/appStore'
 import AgentLog from '../components/AgentLog'
@@ -48,7 +48,7 @@ export default function SearchPage() {
     abortRef.current = controller
 
     try {
-      const response = await fetch('/api/search/stream', {
+      const response = await fetch(`${API_BASE_URL}/search/stream`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query }),
@@ -95,7 +95,7 @@ export default function SearchPage() {
     }
 
     try {
-      const response = await fetch('/api/papers/select/stream', {
+      const response = await fetch(`${API_BASE_URL}/papers/select/stream`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
