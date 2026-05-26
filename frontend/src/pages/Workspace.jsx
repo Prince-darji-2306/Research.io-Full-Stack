@@ -157,7 +157,7 @@ export default function Workspace() {
 
   /* ── Main Layout ─────────────────────────────────────────────────── */
   return (
-    <div className="h-[calc(100vh-68px)] flex flex-col px-2 pt-4 pb-5 gap-4 overflow-hidden">
+    <div className="h-[calc(100dvh-85px)] flex flex-col px-2 pt-2 pb-5 gap-4 overflow-hidden">
       {/* Main split view */}
       <div className="flex-1 flex gap-3 p-1.5 min-h-0 overflow-visible relative">
 

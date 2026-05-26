@@ -10,12 +10,20 @@
   --shadow-light: rgba(255, 255, 255, 0.6);
 }
 
+html, body {
+  background-color: #e0e5ec;
+}
+
 .dark {
   --bg-skeuo: #1e2229;
   --bg-gradient-skeuo: linear-gradient(145deg, #252a32, #15181d);
   --bg-gradient-skeuo-raised: linear-gradient(145deg, #2a2f38, #1e2229);
   --shadow-dark: rgba(0, 0, 0, 0.45);
   --shadow-light: rgba(255, 255, 255, 0.05);
+}
+
+html.dark, html.dark body {
+  background-color: #1a1d24;
 }
 
 /* ── Grain texture overlay ─────────────────────────────────────────── */

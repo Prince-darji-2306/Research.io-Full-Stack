@@ -382,9 +382,10 @@ export default function ChatPanel({ sessionId, titleAccessory }) {
         ))}
 
         {chatMessages.length === 0 && (
-          <div className="flex flex-col items-center justify-center h-full text-ink/30 dark:text-cream/30">
-            <Bot size={48} className="mb-3 opacity-20" />
-            <p className="text-sm">Upload a paper to start chatting</p>
+          <div className="flex flex-col items-center justify-center h-full text-ink/50 dark:text-cream/50 text-center px-4">
+            <Bot size={48} className="mb-4 text-amber-brand opacity-80" />
+            <h4 className="text-base font-bold mb-1 text-ink dark:text-cream">Ready for your questions!</h4>
+            <p className="text-sm">Ask me anything about this paper.</p>
           </div>
         )}
 
