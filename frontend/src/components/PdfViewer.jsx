@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   ChevronLeft, ChevronRight, ZoomIn, ZoomOut, Download, Maximize2, RotateCw
 } from 'lucide-react'
+import { API_BASE_URL } from '../utils/api'
 import 'react-pdf/dist/Page/AnnotationLayer.css'
 import 'react-pdf/dist/Page/TextLayer.css'
 
@@ -18,7 +19,7 @@ export default function PdfViewer({ paperId }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  const pdfUrl = `/api/papers/${paperId}/pdf`
+  const pdfUrl = `${API_BASE_URL}/papers/${paperId}/pdf`
 
   const onDocLoaded = ({ numPages }) => {
     setNumPages(numPages)

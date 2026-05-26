@@ -5,6 +5,7 @@ import { Maximize2, Minimize2, X, BookOpen, ChevronUp, ChevronDown } from 'lucid
 import 'react-pdf/dist/Page/AnnotationLayer.css'
 import 'react-pdf/dist/Page/TextLayer.css'
 import { useAppStore } from '../store/appStore'
+import { API_BASE_URL } from '../utils/api'
 
 function useMediaQuery(query) {
   const [matches, setMatches] = useState(() => window.matchMedia(query).matches)
@@ -101,7 +102,7 @@ export default function PdfHighlightPanel({
     }
   }, [fp, loading])
 
-  const pdfUrl = `/api/papers/${paperId}/pdf`
+  const pdfUrl = `${API_BASE_URL}/papers/${paperId}/pdf`
 
   // Extract unique pages from chunks, sorted
   const chunkPages = useMemo(() => {
